@@ -45,3 +45,8 @@ To deploy this contract on the Avalanche Fuji testnet, follow these steps:
 
 - Solidity ^0.8.12 (compatible with Avalanche)
 - Avalanche-compatible wallet for deploying and interacting with the contract
+
+## Author
+
+Aayush Tewari
+Chandigarh University
