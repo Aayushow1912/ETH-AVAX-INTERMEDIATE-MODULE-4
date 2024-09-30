@@ -1,53 +1,86 @@
-# DegenToken Smart Contract 
+# ERC-20 Degen Token Contract
 
-The DegenToken Smart Contract is an Ethereum-compatible smart contract written in Solidity, designed to be deployed on the Avalanche Fuji testnet. It implements an ERC-20 token with added functionalities, such as minting, transferring, and burning tokens, as well as an in-game store where tokens can be redeemed for items.
+This Solidity program demonstrates an ERC-20 Token with support for the transfer, minting, and burning of tokens, as well as additional gaming and in-game item functionalities.
 
-## Features
+## Description
 
-### ERC-20 Token Standard
+The Solidity contract `DegenToken` defines an ERC-20 token with essential functionalities such as minting, burning, and transferring tokens. It also includes a system for purchasing and redeeming in-game items. Additionally, users can participate in a simple game where they bet tokens on random outcomes. The contract uses the OpenZeppelin library for security and follows the ERC-20 standard.
 
-This contract adheres to the ERC-20 token standard, providing basic token functionalities, including transfers, balance inquiries, and allowance management.
+# Contract Overview
+The `DegenToken` contract is a basic implementation of an ERC-20-like token with additional game-related features. It includes the following components:
 
-### Minting Tokens
+1) **`owner`**: The owner's address is set when the contract is deployed, allowing them to mint new tokens and add game items.
 
-The contract owner has the exclusive right to mint additional tokens using the `mint` function. This allows the owner to create new tokens and distribute them to specific accounts.
+2) **`items`**: A mapping that stores in-game items available for purchase using tokens, each with a unique `itemId`, name, and price.
 
-### Transferring Tokens
+3) **`playerItems`**: A mapping that tracks which items have been purchased by each user.
 
-Users can transfer tokens to different addresses using the `transferTokens` function. It checks for a valid recipient address, sufficient balance, and a non-zero transfer amount.
+# Usage
 
-### Redeeming Tokens for Items
+### Constructor
 
-The contract includes a feature to redeem tokens for items in an in-game store. Users can specify an item ID and, if the item exists and they have a sufficient balance, they can redeem the item. The example contract logic deducts tokens from the user's balance for this purpose.
+The contract constructor initializes the token with an initial supply and assigns the deploying address as the owner. The owner can also mint new tokens or add in-game items.
 
-### Adding Items to the Store
+Functions
 
-The contract owner can add items to the in-game store by specifying an item ID and its price using the `addItemToStore` function.
+mint(address to, uint256 amount);
+// Allows the contract owner to mint new tokens and add them to a specified address's balance.
 
-### Checking Token Balances
+burn(uint256 amount);
+// Allows users to burn (destroy) a specific amount of their tokens.
 
-Users can check their token balances using the `getTokenBalance` function, which provides the balance of tokens for a given address.
+transferToken(address recipient, uint256 amount);
+// Allows users to transfer a specified amount of tokens from sender to recipient.
 
-### Burning Tokens
+wel_Bonus();
+// Allows new users to claim a welcome bonus of 50 tokens, but only if they have a zero balance.
 
-Users can burn their own tokens using the `burnTokens` function, which reduces their token balance by a specified amount, provided they have a sufficient balance.
+add_Item(string memory _name, uint256 _price);
+// Allows the owner to add new in-game items to the system, with a unique ID and price in tokens.
 
-## Contract Deployment on Avalanche Fuji Testnet
+LessThanFive(bool _prediction, uint256 _betAmount);
+// A simple game where users bet tokens on whether a random number (0-9) is less than 5. Winners double their bet.
 
-To deploy this contract on the Avalanche Fuji testnet, follow these steps:
+purchase_Item(uint8 _itemId);
+// Allows users to purchase in-game items using tokens, reducing their balance and storing the purchased items in `playerItems`.
 
-1. Make sure you have access to an Avalanche wallet compatible with the Fuji testnet.
-2. Compile the contract code using a Solidity compiler compatible with Avalanche, and obtain the compiled bytecode.
-3. Deploy the contract to the Avalanche Fuji testnet using your Avalanche wallet's deployment functionality.
-4. After deployment, interact with the contract using Avalanche-compatible tools and wallets.
+get_User_Items(address user) external view returns (uint8[] memory);
+// Returns a list of item IDs purchased by a specific user.
 
-## Prerequisites
+get_Item_Name(uint8 _id) external view returns (string memory);
+// Retrieves the name of a specific item by its itemId.
 
-- Solidity ^0.8.12 (compatible with Avalanche)
-- Avalanche-compatible wallet for deploying and interacting with the contract
+get_Item_Price(uint8 _id) external view returns (uint256);
+// Retrieves the price of a specific item by its itemId.
 
-## Author
+get_Balance() external view returns (uint256);
+// Allows users to check their token balance.
 
+burn_Token(uint _amount) external;
+// Allows users to burn a specified amount of their tokens.
+
+Getting Started
+Installation
+Open in Remix
+
+Executing Program
+To run this program, you can use Remix, an online Solidity IDE. To get started, go to the Remix website at Remix Ethereum.
+
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+
+contract DegenToken is ERC20, Ownable, ERC20Burnable {
+    // Contract details here
+}
+Help
+To compile the code, click on the "Solidity Compiler" tab in the left-hand sidebar. Make sure the "Compiler" option is set to "0.8.20" (or another compatible version), and then click on the "Compile DegenToken.sol" button.
+
+Once the code is compiled, you can deploy the contract by clicking on the "Deploy & Run Transactions" tab in the left-hand sidebar. Select the "DegenToken" contract from the dropdown menu, and then click on the "Deploy" button.
+
+Authors
 Aayush Tewari
-
-Chandigarh University
