@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.13;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -48,19 +48,27 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
         transfer(_recipient, _amount);
     }
 
+
+    // Burning tokens
+
+    function burnToken(uint _amount) external {
+        require(balanceOf(msg.sender)>=_amount, "Insufficient amount");
+        burn(_amount);
+    }
+
     // Redeeming tokens
 
-    function welcomeBonus() public {
+    function wel_Bonus() public {
         require(balanceOf(msg.sender) == 0, "You've already claimed your welcome bonus");
         _mint(msg.sender, 50);
     }
 
-    function addItem(string memory _name, uint256 _price) public onlyOwner {
+    function add_Item(string memory _name, uint256 _price) public onlyOwner {
         items[tokenId] = Item(_name, tokenId,_price);
         tokenId++;
     } 
 
-    function isLessThanFive(bool _prediction, uint256 _betAmount) public {
+    function Less_Than_Five(bool _prediction, uint256 _betAmount) public {
         uint randomNumber = uint(keccak256(abi.encodePacked(block.timestamp, msg.sender))) % 10;
 
         if (_prediction ==(randomNumber<5)) {
@@ -73,7 +81,7 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
         }
     }
     
-    function purchaseItem(uint8 _itemId) external {
+    function pur_Item(uint8 _itemId) external {
         require(items[_itemId].price != 0, "Item not found");
         require(balanceOf(msg.sender) >= items[_itemId].price, "Insufficient balance");
 
@@ -83,7 +91,7 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
         emit ItemPurchased(msg.sender, _itemId, items[_itemId].name, items[_itemId].price);
     }
 
-    function getUserItems(address user) external view returns (uint8[] memory) {
+    function get_User_Items(address user) external view returns (uint8[] memory) {
         Item[] memory itemsList = playerItems[user];
         uint length = itemsList.length;
 
@@ -102,18 +110,10 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
         return items[_id].price;
     }
 
-
-    // Checking token balance
+ // Checking token balance
 
     function getBalance() external view returns(uint256){
         return balanceOf(msg.sender);
-    }
-
-    // Burning tokens
-
-    function burnToken(uint _amount) external {
-        require(balanceOf(msg.sender)>=_amount, "Insufficient amount");
-        burn(_amount);
     }
 
 }
