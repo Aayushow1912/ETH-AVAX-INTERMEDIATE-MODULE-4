@@ -23,40 +23,40 @@ The contract constructor initializes the token with an initial supply and assign
 
 Functions
 
-mint(address to, uint256 amount);
+`mint(address to, uint256 amount);`
 // Allows the contract owner to mint new tokens and add them to a specified address's balance.
 
-burn(uint256 amount);
+`burn(uint256 amount);`
 // Allows users to burn (destroy) a specific amount of their tokens.
 
-transferToken(address recipient, uint256 amount);
+`transferToken(address recipient, uint256 amount);`
 // Allows users to transfer a specified amount of tokens from sender to recipient.
 
-wel_Bonus();
+`wel_Bonus();`
 // Allows new users to claim a welcome bonus of 50 tokens, but only if they have a zero balance.
 
-add_Item(string memory _name, uint256 _price);
+`add_Item(string memory _name, uint256 _price);`
 // Allows the owner to add new in-game items to the system, with a unique ID and price in tokens.
 
-LessThanFive(bool _prediction, uint256 _betAmount);
+`LessThanFive(bool _prediction, uint256 _betAmount);`
 // A simple game where users bet tokens on whether a random number (0-9) is less than 5. Winners double their bet.
 
-purchase_Item(uint8 _itemId);
+`purchase_Item(uint8 _itemId);`
 // Allows users to purchase in-game items using tokens, reducing their balance and storing the purchased items in `playerItems`.
 
-get_User_Items(address user) external view returns (uint8[] memory);
+`get_User_Items(address user) external view returns (uint8[] memory);`
 // Returns a list of item IDs purchased by a specific user.
 
-get_Item_Name(uint8 _id) external view returns (string memory);
+`get_Item_Name(uint8 _id) external view returns (string memory);`
 // Retrieves the name of a specific item by its itemId.
 
-get_Item_Price(uint8 _id) external view returns (uint256);
+`get_Item_Price(uint8 _id) external view returns (uint256);`
 // Retrieves the price of a specific item by its itemId.
 
-get_Balance() external view returns (uint256);
+`get_Balance() external view returns (uint256);`
 // Allows users to check their token balance.
 
-burn_Token(uint _amount) external;
+`burn_Token(uint _amount) external;`
 // Allows users to burn a specified amount of their tokens.
 
 Getting Started
