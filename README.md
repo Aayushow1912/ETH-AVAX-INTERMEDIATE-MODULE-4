@@ -77,10 +77,12 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 contract DegenToken is ERC20, Ownable, ERC20Burnable {
     // Contract details here
 }
-Help
+
+## Help
 To compile the code, click on the "Solidity Compiler" tab in the left-hand sidebar. Make sure the "Compiler" option is set to "0.8.20" (or another compatible version), and then click on the "Compile DegenToken.sol" button.
 
 Once the code is compiled, you can deploy the contract by clicking on the "Deploy & Run Transactions" tab in the left-hand sidebar. Select the "DegenToken" contract from the dropdown menu, and then click on the "Deploy" button.
 
-Authors
+## Authors
+
 Aayush Tewari
